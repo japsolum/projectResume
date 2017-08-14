@@ -65,19 +65,19 @@ var projects = {
             "title" : "Memory Game",
             "dates" : "7/2017",
             "description" : "Basic memory game where you can flip two cards and hope for a match.",
-            "images" : ["memoryGame_600.jpg"]
+            "images" : ["images/memoryGame_300.jpg"]
         },
         {
             "title" : "Article Mockup",
             "dates" : "7-2017",
-            "description" : "Web page that displays 6 favorite movies, basic info about them, along with poster image and a link to the trailer.",
-            "images" : ["articleMock.jpg"]
+            "description" : "Mockup of an artice pdf",
+            "images" : ["images/articleMock_300.jpg"]
         },
         {
-            "title" : "Animal Card mockup",
+            "title" : "Animal Card Mockup",
             "dates" : "8-2017",
             "description" : "Mockup of an animal trading card designed off a pdf image.",
-            "images" : ["animalCard_600.jpg"]
+            "images" : ["images/animalCard_300.jpg"]
         }
     ]
 }
@@ -86,12 +86,13 @@ var bio = {
     "name" : "James Solum",
     "role" : "Web Developer",
     "welcomeMessage" : "Welcome to my interactive resume!",
-    "biopic" : "biopic.jpg",
+    "biopic" : "images/biopic.jpg",
     "contacts" : {
         "Mobile" : "720.369.4276",
-        "Email" : "JapSolum@gmail.com",
+        "Email" : "JapSolum@hotmail.com",
         "Github" : "github.com/japsolum",
-        "location" : "Castle Rock, CO"
+        "location" : "Castle Rock, CO",
+        "LinkedIn" : "https://www.linkedin.com/in/james-solum-113545149/"
     },
     "skills" : ["HTML", "CSS", "JavaScript", "Python", "Java"]
 }
@@ -101,16 +102,16 @@ var education = {
 	"schools" : [
 		{
 			"name" : "Hartenbach High School",
-			"degreeDates" :  "2004",
+			"degreeDates" :  "2003-2004",
 			"location" :  "Aurora, CO",
 			"graduated" : "Diploma",
 			"url" : "http://www.balfour.com/colorado/aurora/hartenbach-alternative-high-school/",
 			"majors" : "N/A"
 		},
 		{
-			"schoolName" : "Rangeview High School",
-			"yearsAttended" :  "2002 - 2004",
-			"schoolCity" :  "Aurora, CO",
+			"name" : "Rangeview High School",
+			"degreeDates" :  "2002 - 2003",
+			"location" :  "Aurora, CO",
 			"graduated" : "N/A",
 			"url" : "http://rangeview.aurorak12.org/",
 			"majors" : "N/A"
@@ -118,7 +119,7 @@ var education = {
 	],
 	"onlineCourse" : [
 		{
-			"title" : "Front-End Web Developer",
+			"title" : "Front-End Web Developer Nanodegree",
 			"school" : "Udacity",
 			"dates" : "2017",
 			"url" : "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
@@ -134,7 +135,24 @@ var education = {
 
 if (bio.skills.length > 0) {
 	var name = HTMLheaderName.replace("%data%", bio.name);
-	$("#header").append(name);
+	var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+	var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.Mobile);
+	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.Email);
+	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.Github);
+	var formattedLinkedIn = HTMLcontactGeneric.replace("%contact%", "linkedIn").replace("%data%", bio.contacts.LinkedIn);
+	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+
+	$("#header").prepend(formattedRole);
+	$("#header").prepend(name);
+	$("#topContacts, #footerContacts").append(formattedMobile);
+	$("#topContacts, #footerContacts").append(formattedEmail);
+	$("#topContacts, #footerContacts").append(formattedGithub);
+	$("#topContacts, #footerContacts").append(formattedLinkedIn);
+	$("#topContacts, #footerContacts").append(formattedLocation);
+	$("#header").append(formattedBioPic);
+	$("#header").append(formattedWelcomeMessage);
 	$("#header").append(HTMLskillsStart);
 	var formattedSkill = "";
 	for (var i = 0; i < bio.skills.length; i++) {
@@ -151,8 +169,68 @@ if (bio.skills.length > 0) {
 		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[i].title);
 		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[i].dates);
 		var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[i].location);
-		var formattedDescription = HTMLworkDescription.replace("%data", work.jobs[i].description);
+		var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[i].description);
 		$(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription);
 	};
 };
 displayWork();
+
+function displayEducation(){
+	for (var p = 0; p < education.schools.length; p++){
+		var formattedName = HTMLschoolName.replace("#", education.schools[p].url).replace("%data%", education.schools[p].name);
+		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[p].graduated);
+		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[p].degreeDates);
+		var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[p].location);
+		$("#education").append(HTMLschoolStart);
+		$(".education-entry:last").append(formattedName + formattedDegree);
+		$(".education-entry:last").append(formattedDates);
+		$(".education-entry:last").append(formattedLocation);
+		console.log(p);
+	};
+	$(".education-entry:last").append(HTMLonlineClasses);
+	for (var i = 0; i < education.onlineCourse.length; i++){
+		var formattedTitle = HTMLonlineTitle.replace("#", education.onlineCourse[i].url).replace("%data%", education.onlineCourse[i].title);
+		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourse[i].school);
+		var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourse[i].dates);
+		$(".education-entry:last").append(formattedTitle + formattedSchool);
+		$(".education-entry:last").append(formattedOnlineDates);
+		
+	};
+
+};
+displayEducation();
+
+projects.display = function() {
+	for (var i = 0; i < projects.projects.length; i++){
+		$("#projects").append(HTMLprojectStart);
+		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[i].title);
+		var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[i].dates);
+		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[i].description);
+		var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[i].images[0]);
+		$("#projects").append(formattedTitle + formattedDates + formattedDescription + formattedImage);
+	};
+};
+projects.display();
+
+/*function locationizer(obj){
+	var locArray = [];
+	for (var i = 0; i < obj.jobs.length; i++){
+		locArray.push(obj.jobs[i].location);
+	};
+	return locArray;
+}; */
+/*$("#main").append(internationalizeButton);
+function inName(name){
+	var intName = "";
+	for (i = 0; i < name.length; i++){
+		if (i === 0){
+			intName += name.charAt(i).toUpperCase();
+		} else if (name.charAt(i) === " "){
+			intName += name.slice(i).toUpperCase();
+			break;
+		} else {
+			intName += name.charAt(i).toLowerCase();
+		} 
+	};
+	return intName;
+};*/
