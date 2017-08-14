@@ -1,38 +1,3 @@
-/*var formattedName = HTMLheaderName.replace("%data%", "James Solum");
-var formattedRole = HTMLheaderRole.replace("%data%", "Web Developer");
-
-//$("#header").prepend(formattedRole);
-//$("#header").prepend(formattedName);
-
-var bio = {
-	"name" : "James Solum",
-	"role" : "Web Developer",
-	"contactInfo" : ["japsolum@hotmail.com", "720.369.4276"],
-	"pictureURL" : "",
-	"welcomeMessage" : "Welcome to my interactive resume",
-	"skills" : ["HTML", "CSS", "Javascript", "Being awesome"]
-
-};
-$("#main").append(bio.name);
-$("#main").append(bio.role);
-$("#main").append(bio.contactInfo);
-$("#main").append(bio.pictureURL);
-$("#main").append(bio.welcomeMessage);
-$("#main").append(bio.skills);
-
-var work = {};
-work.current = "Tech Support Representative";
-work.employer = "ATT";
-work.yearsWorked = 2;
-work.workCity = "Englewood";
-
-var education = {};
-	education["schoolName"] = "Hartenbach";
-	education["yearsAttended"] =  "1";
-	education["schoolCity"] =  "Aurora";
-
-$("#main").append(education.schoolName);
-$("#main").append(work["current"]);*/
 var work = {
     "jobs" : [
         {
@@ -134,7 +99,7 @@ var education = {
 };
 
 if (bio.skills.length > 0) {
-	var name = HTMLheaderName.replace("%data%", bio.name);
+	var formattedName = HTMLheaderName.replace("%data%", bio.name);
 	var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
 	var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
@@ -145,7 +110,7 @@ if (bio.skills.length > 0) {
 	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
 
 	$("#header").prepend(formattedRole);
-	$("#header").prepend(name);
+	$("#header").prepend(formattedName);
 	$("#topContacts, #footerContacts").append(formattedMobile);
 	$("#topContacts, #footerContacts").append(formattedEmail);
 	$("#topContacts, #footerContacts").append(formattedGithub);
@@ -173,7 +138,6 @@ if (bio.skills.length > 0) {
 		$(".work-entry:last").append(formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription);
 	};
 };
-displayWork();
 
 function displayEducation(){
 	for (var p = 0; p < education.schools.length; p++){
@@ -198,7 +162,6 @@ function displayEducation(){
 	};
 
 };
-displayEducation();
 
 projects.display = function() {
 	for (var i = 0; i < projects.projects.length; i++){
@@ -210,6 +173,10 @@ projects.display = function() {
 		$("#projects").append(formattedTitle + formattedDates + formattedDescription + formattedImage);
 	};
 };
+
+$("#mapDiv").append(googleMap);
+displayEducation();
+displayWork();
 projects.display();
 
 /*function locationizer(obj){
