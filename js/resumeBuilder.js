@@ -50,7 +50,7 @@ var projects = {
 var bio = {
     "name" : "James Solum",
     "role" : "Web Developer",
-    "welcomeMessage" : "Welcome to my interactive resume!",
+    "welcomeMessage" : "Ambition is the path to success, persistence is the vehicle you arrive in.",
     "biopic" : "images/biopic.jpg",
     "contacts" : {
         "Mobile" : "720.369.4276",
@@ -106,7 +106,7 @@ if (bio.skills.length > 0) {
 	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.Mobile);
 	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.Email);
 	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.Github);
-	var formattedLinkedIn = HTMLcontactGeneric.replace("%contact%", "linkedIn").replace("%data%", bio.contacts.LinkedIn);
+	var formattedLinkedIn = HTMLcontactGeneric.replace("%contact%", "LinkedIn").replace("%data%", bio.contacts.LinkedIn);
 	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
 
 	$("#header").prepend(formattedRole);
@@ -119,9 +119,8 @@ if (bio.skills.length > 0) {
 	$("#header").append(formattedBioPic);
 	$("#header").append(formattedWelcomeMessage);
 	$("#header").append(HTMLskillsStart);
-	var formattedSkill = "";
 	for (var i = 0; i < bio.skills.length; i++) {
-		formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
+		var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
 		$("#skills").append(formattedSkill);
 	};
 
@@ -170,7 +169,7 @@ projects.display = function() {
 		var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[i].dates);
 		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[i].description);
 		var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[i].images[0]);
-		$("#projects").append(formattedTitle + formattedDates + formattedDescription + formattedImage);
+		$(".project-entry:last").append(formattedTitle + formattedDates + formattedDescription + formattedImage);
 	};
 };
 
