@@ -53,11 +53,11 @@ var bio = {
     "welcomeMessage" : "Ambition is the path to success, persistence is the vehicle you arrive in.",
     "biopic" : "images/biopic.jpg",
     "contacts" : {
-        "Mobile" : "720.369.4276",
-        "Email" : "JapSolum@hotmail.com",
-        "Github" : "github.com/japsolum",
+        "mobile" : "720.369.4276",
+        "email" : "JapSolum@hotmail.com",
+        "github" : "github.com/japsolum",
         "location" : "Castle Rock, CO",
-        "LinkedIn" : "https://www.linkedin.com/in/james-solum-113545149/"
+        "linkedIn" : "https://www.linkedin.com/in/james-solum-113545149/"
     },
     "skills" : ["HTML", "CSS", "JavaScript", "Python", "Java"]
 };
@@ -67,22 +67,22 @@ var education = {
 	"schools" : [
 		{
 			"name" : "Hartenbach High School",
-			"degreeDates" :  "2003-2004",
+			"dates" :  "2003-2004",
 			"location" :  "Aurora, CO",
-			"graduated" : "Diploma",
+			"degree" : "Diploma",
 			"url" : "http://www.balfour.com/colorado/aurora/hartenbach-alternative-high-school/",
-			"majors" : "N/A"
+			"majors" : ["N/A"]
 		},
 		{
 			"name" : "Rangeview High School",
-			"degreeDates" :  "2002 - 2003",
+			"dates" :  "2002 - 2003",
 			"location" :  "Aurora, CO",
-			"graduated" : "N/A",
+			"degree" : "N/A",
 			"url" : "http://rangeview.aurorak12.org/",
-			"majors" : "N/A"
+			"majors" : ["N/A"]
 		}
 	],
-	"onlineCourse" : [
+	"onlineCourses" : [
 		{
 			"title" : "Front-End Web Developer Nanodegree",
 			"school" : "Udacity",
@@ -103,10 +103,10 @@ bio.display = function() {
 	var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
 	var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.Mobile);
-	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.Email);
-	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.Github);
-	var formattedLinkedIn = HTMLcontactGeneric.replace("%contact%", "LinkedIn").replace("%data%", bio.contacts.LinkedIn);
+	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+	var formattedLinkedIn = HTMLcontactGeneric.replace("%contact%", "LinkedIn").replace("%data%", bio.contacts.linkedIn);
 	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
 
 	$("#header").prepend(formattedRole);
@@ -141,8 +141,8 @@ bio.display = function() {
 education.display = function(){
 	for (var p = 0; p < education.schools.length; p++){
 		var formattedName = HTMLschoolName.replace("#", education.schools[p].url).replace("%data%", education.schools[p].name);
-		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[p].graduated);
-		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[p].degreeDates);
+		var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[p].degree);
+		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[p].dates);
 		var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[p].location);
 		$("#education").append(HTMLschoolStart);
 		$(".education-entry:last").append(formattedName + formattedDegree);
@@ -152,9 +152,9 @@ education.display = function(){
 	}
 	$(".education-entry:last").append(HTMLonlineClasses);
 	for (var i = 0; i < education.onlineCourse.length; i++){
-		var formattedTitle = HTMLonlineTitle.replace("#", education.onlineCourse[i].url).replace("%data%", education.onlineCourse[i].title);
-		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourse[i].school);
-		var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourse[i].dates);
+		var formattedTitle = HTMLonlineTitle.replace("#", education.onlineCourses[i].url).replace("%data%", education.onlineCourses[i].title);
+		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
+		var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
 		$(".education-entry:last").append(formattedTitle + formattedSchool);
 		$(".education-entry:last").append(formattedOnlineDates);
 		
@@ -181,3 +181,6 @@ if (bio.skills.length > 0) {
 education.display();
 work.display();
 projects.display();
+
+Car.call(this, loc);
+ 
