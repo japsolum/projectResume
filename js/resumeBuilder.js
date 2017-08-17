@@ -148,10 +148,9 @@ education.display = function(){
 		$(".education-entry:last").append(formattedName + formattedDegree);
 		$(".education-entry:last").append(formattedDates);
 		$(".education-entry:last").append(formattedLocation);
-		console.log(p);
 	}
 	$(".education-entry:last").append(HTMLonlineClasses);
-	for (var i = 0; i < education.onlineCourse.length; i++){
+	for (var i = 0; i < education.onlineCourses.length; i++){
 		var formattedTitle = HTMLonlineTitle.replace("#", education.onlineCourses[i].url).replace("%data%", education.onlineCourses[i].title);
 		var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
 		var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
@@ -182,5 +181,5 @@ education.display();
 work.display();
 projects.display();
 
-Car.call(this, loc);
+
  
