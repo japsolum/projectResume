@@ -5,13 +5,15 @@ var work = {
             "title" : "Tech Support Representative",
             "location" : "Englewood, CO",
             "dates" : "5/2015 - current",
-            "description" : "In a department where we are responsible for running tests for DirecTv. anything from new troubleshooting to changing phrasing on something we already do."
+            "url" : "https://www.att.com/#",
+            "description" : "In a department where we are responsible for running tests for DirecTv. Anything from new troubleshooting steps, to changing phrasing or process on something we already do."
         },
         {
             "employer" : "Irish Snug",
             "title" : "Executive Chef/Kitchen Manager",
             "location" : "Denver, CO",
             "dates" : "8/2013 - 5/2015",
+            "url" : "http://irishsnug.com/",
             "description" : "In charge of running kitchen for a busy bar in Denver. Responsible for writing schedules, placing food orders, managing food cost, and all hiring and firing of kitchen staff."
         },
         {
@@ -19,31 +21,9 @@ var work = {
             "title" : "Executive Chef / Kitchen Manager",
             "location" : "Aurora, CO",
             "dates" : "6/2006 - 8/2013",
+            "url" : "http://www.mccarthysaurora.com/",
             "description" : "In charge of running kitchen for a sports bar in Aurora. Responsible for writing schedules, placing food orders, managing food cost, and all hiring and firing of kitchen staff. Also trained to take over for GM in his absence"
        }
-    ]
-};
-
-var projects = {
-    "projects" : [
-        {
-            "title" : "Memory Game",
-            "dates" : "7/2017",
-            "description" : "Basic memory game where you can flip two cards and hope for a match.",
-            "images" : ["images/memoryGame_300.jpg"]
-        },
-        {
-            "title" : "Article Mockup",
-            "dates" : "7-2017",
-            "description" : "Mockup of an artice pdf",
-            "images" : ["images/articleMock_300.jpg"]
-        },
-        {
-            "title" : "Animal Card Mockup",
-            "dates" : "8-2017",
-            "description" : "Mockup of an animal trading card designed off a pdf image.",
-            "images" : ["images/animalCard_300.jpg"]
-        }
     ]
 };
 
@@ -55,14 +35,19 @@ var bio = {
     "contacts" : {
         "mobile" : "720.369.4276",
         "email" : "JapSolum@hotmail.com",
-        "github" : "github.com/japsolum",
+        "github" : {
+        	"view" : "github.com/japsolum",
+        	"url" : "http://www.github.com/japsolum"
+        },
         "location" : "Castle Rock, CO",
-        "linkedIn" : "https://www.linkedin.com/in/james-solum-113545149/"
+        "linkedIn" : {
+        	"view" : "linkedin.com/in/james-solum-113545149/",
+        	"url" : "https://www.linkedin.com/in/james-solum-113545149/"
+        }
     },
-    "skills" : ["HTML", "CSS", "JavaScript", "Python", "Java"]
+    "skills" : ["HTML - 6/10", "CSS - 6/10", "JavaScript - 6/10", "Python - 3/10", "Java - 3/10"]
 };
 
-//example of valid json
 var education = {
 	"schools" : [
 		{
@@ -87,13 +72,13 @@ var education = {
 			"title" : "Front-End Web Developer Nanodegree",
 			"school" : "Udacity",
 			"dates" : "2017",
-			"url" : "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
+			"url" : "https://printer.udacity.com/certificate/nd001"
 		},
 		{
 			"title" : "Intro to Programming Nanodegree",
 			"school" : "Udacity",
 			"dates" : "2017",
-			"url" : "https://www.udacity.com/course/intro-to-programming-nanodegree--nd000"
+			"url" : "https://printer.udacity.com/certificate/nd000"
 		}
 	]
 };
@@ -104,9 +89,9 @@ bio.display = function() {
 	var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-	var formattedLinkedIn = HTMLcontactGeneric.replace("%contact%", "LinkedIn").replace("%data%", bio.contacts.linkedIn);
+	var formattedEmail = HTMLemail.replace("#", bio.contacts.email).replace("%data%", bio.contacts.email);
+	var formattedGithub = HTMLgithub.replace("#", bio.contacts.github.url).replace("%data%", bio.contacts.github.view);
+	var formattedLinkedIn = HTMLcontactGeneric.replace("#", bio.contacts.linkedIn.url).replace("%contact%", "LinkedIn").replace("%data%", bio.contacts.linkedIn.view);
 	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
 
 	$("#header").prepend(formattedRole);
@@ -129,7 +114,7 @@ bio.display = function() {
  work.display = function() {
 	for (var i = 0; i < work.jobs.length; i++) {
 		$("#workExperience").append(HTMLworkStart);
-		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
+		var formattedEmployer = HTMLworkEmployer.replace("#", work.jobs[i].url).replace("%data%", work.jobs[i].employer);
 		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[i].title);
 		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[i].dates);
 		var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[i].location);
@@ -145,13 +130,9 @@ education.display = function(){
 		var formattedDates = HTMLschoolDates.replace("%data%", education.schools[p].dates);
 		var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[p].location);
 		$("#education").append(HTMLschoolStart);
+		$(".education-entry:last").append(formattedLocation);
 		$(".education-entry:last").append(formattedName + formattedDegree);
 		$(".education-entry:last").append(formattedDates);
-		$(".education-entry:last").append(formattedLocation);
-		for (var n = 0; n < education.schools[p].majors.length; n++){
-			var formattedMajors = HTMLschoolMajor.replace("%data%", education.schools[p].majors[n]);
-			$(".education-entry:last").append(formattedMajors);
-		}
 	}
 	$(".education-entry:last").append(HTMLonlineClasses);
 	for (var i = 0; i < education.onlineCourses.length; i++){
@@ -163,20 +144,6 @@ education.display = function(){
 		
 	}
 
-};
-
-projects.display = function() {
-	for (var i = 0; i < projects.projects.length; i++){
-		$("#projects").append(HTMLprojectStart);
-		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[i].title);
-		var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[i].dates);
-		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[i].description);
-		$(".project-entry:last").append(formattedTitle + formattedDates + formattedDescription);
-		for (var p = 0; p < projects.projects[i].images.length; p++){
-			var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[i].images[p]);
-			$(".project-entry:last").append(formattedImage);
-		}
-	}
 };
 
 $("#mapDiv").append(googleMap);
